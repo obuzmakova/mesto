@@ -19,5 +19,7 @@
 }
 
 .element__like:active {
-
+    background-image: url("../../../images/like-active.svg");
+    background-color: unset;
+    opacity: 1;
 }

@@ -6,8 +6,18 @@
     height: 330px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background: #FFFFFF;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 560px) {
+    .popup__container {
+        width: 282px;
+        height: 322px;
+        top: calc(50vh - 161px);
+        right: calc((100vw - 282px) / 2);
+    }
 }
