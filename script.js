@@ -1,34 +1,36 @@
 let content = document.querySelector('.content');
-let popupForm = content.querySelector('.popup');
 let editButton = content.querySelector('.profile__edit-button');
+let popupForm = content.querySelector('.popup');
+let popupContainer = popupForm.querySelector('.popup__container');
+let closeButton = popupContainer.querySelector('.popup__close-button');
+let editName = popupContainer.querySelector('.popup__text_type_name');
+let editOccupation = popupContainer.querySelector('.popup__text_type_occupation')
+
+let name = content.querySelector('.profile__title');
+let occupation = content.querySelector('.profile__subtitle');
+
+editName.setAttribute('value', `${name.textContent}`);
+editOccupation.setAttribute('value', `${occupation.textContent}`);
 
 function editOpen() {
     popupForm.classList.add('popup_opened');
 }
 
+function closeForm() {
+    popupForm.classList.remove('popup_opened');
+}
+
 editButton.addEventListener('click', editOpen);
+closeButton.addEventListener('click', closeForm);
 
-// Находим форму в DOM
-/*let formElement = // Воспользуйтесь методом querySelector()
+function handleFormSubmit (evt) {
+    evt.preventDefault();
+    // Эта строчка отменяет стандартную отправку формы..
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-    function handleFormSubmit (evt) {
-        evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-        // Так мы можем определить свою логику отправки.
-        // О том, как это делать, расскажем позже.
-
-        // Находим поля формы в DOM
-        let nameInput = // Воспользуйтесь инструментом .querySelector()
-            let jobInput = // Воспользуйтесь инструментом .querySelector()
-
-        // Получите значение полей из свойства value
-
-        // Выберите элементы, куда должны быть вставлены значения полей
-
-        // Вставьте новые значения с помощью textContent
-    }
+    name.textContent = editName.value;
+    occupation.textContent = editOccupation.value;
+}
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', handleFormSubmit); */
+popupContainer.addEventListener('submit', handleFormSubmit);
