@@ -5,7 +5,6 @@ let popupContainer = popupForm.querySelector('.popup__container');
 let closeButton = popupContainer.querySelector('.popup__close-button');
 let editName = popupContainer.querySelector('.popup__text_type_name');
 let editOccupation = popupContainer.querySelector('.popup__text_type_occupation')
-
 let name = content.querySelector('.profile__title');
 let occupation = content.querySelector('.profile__subtitle');
 
@@ -18,6 +17,8 @@ function editOpen() {
 
 function closeForm() {
     popupForm.classList.remove('popup_opened');
+    editName.value = name.textContent;
+    editOccupation.value = occupation.textContent;
 }
 
 editButton.addEventListener('click', editOpen);
