@@ -29,6 +29,7 @@ function handleFormSubmit (evt) {
 
     name.textContent = editName.value;
     occupation.textContent = editOccupation.value;
+    closeForm();
 }
 
 // Прикрепляем обработчик к форме:
