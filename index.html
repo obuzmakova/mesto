@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="pages/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto. Russia</title>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <img class="header__logo" src="images/header-logo.svg" alt="Название ресурса Место. Россия">
+        </header>
+
+        <main class="content">
+            <section class="profile">
+                <div class="profile__avatar"></div>
+                <div class="profile__info">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button"></button>
+                    <p class="profile__subtitle">Исследователь океана</p>
+                </div>
+                <button class="profile__add-button"></button>
+            </section>
+
+            <section class="popup">
+                <form class="popup__container">
+                    <button class="popup__close-button"></button>
+                    <h3 class="popup__title">Редактировать профиль</h3>
+                    <div class="popup__rows">
+                        <input type="text" class="popup__text popup__text_type_name">
+                        <input type="text" class="popup__text popup__text_type_occupation">
+                    </div>
+                    <input type="submit" value="Сохранить" class="popup__submit-btn popup__submit-btn_action_save">
+                </form>
+            </section>
+
+            <section class="elements">
+                <div class="element">
+                    <img class="element__photo" src="images/element-karachaevsk.jpg" alt="Вид на заброшенный храм">
+                    <h3 class="element__title">Карачаево-Черкесия</h3>
+                    <button class="element__like"></button>
+                </div>
+                <div class="element">
+                    <img class="element__photo" src="images/element-elbrus.jpg" alt="Вид на вершину Эльбруса сквозь холмы">
+                    <h3 class="element__title">Гора Эльбрус</h3>
+                    <button class="element__like"></button>
+                </div>
+                <div class="element">
+                    <img class="element__photo" src="images/element-dombai.jpg" alt="Вид на заснеженные горы">
+                    <h3 class="element__title">Домбай</h3>
+                    <button class="element__like"></button>
+                </div>
+                <div class="element">
+                    <img class="element__photo" src="images/element-elbrus.jpg" alt="Вид на вершину Эльбруса сквозь холмы">
+                    <h3 class="element__title">Гора Эльбрус</h3>
+                    <button class="element__like"></button>
+                </div>
+                <div class="element">
+                    <img class="element__photo" src="images/element-dombai.jpg" alt="Вид на заснеженные горы">
+                    <h3 class="element__title">Домбай</h3>
+                    <button class="element__like"></button>
+                </div>
+                <div class="element">
+                    <img class="element__photo" src="images/element-karachaevsk.jpg" alt="Вид на заброшенный храм">
+                    <h3 class="element__title">Карачаево-Черкесия</h3>
+                    <button class="element__like"></button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__copyright">© 2021 Mesto Russia</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
