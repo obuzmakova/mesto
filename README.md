@@ -1,17 +1,5 @@
-# Проект 4: Место
+# Проект 4: [Место](https://obuzmakova.github.io/mesto/)
 
-### Обзор
+Я создала адаптивную [веб-страницу](https://obuzmakova.github.io/mesto/) с частью логики на JavaScript (в работе с popup-формой для редактирования профиля).
+[Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
 
-* Figma
-* Картинки
-
-**Figma**
-
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
