@@ -1,13 +1,8 @@
 .element {
-    width: 282px;
-    height: 361px;
     background: #FFFFFF;
     border-radius: 10px;
-    position: relative;
-}
-
-@media screen and (max-width: 1275px) {
-    .element {
-        margin: 0 auto;
-    }
+    display: grid;
+    grid-template-columns: 220px 62px;
+    grid-template-rows: 282px 80px;
+    margin: 0 auto;
 }
