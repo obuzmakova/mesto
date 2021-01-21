@@ -8,7 +8,7 @@
     box-sizing: border-box;
     background-color: #000;
     cursor: pointer;
-    margin: 15px auto auto 18px;
+    margin: 15px auto auto 4%;
 }
 
 .profile__edit-button:hover {
