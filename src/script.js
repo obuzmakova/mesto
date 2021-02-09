@@ -7,6 +7,45 @@ let editName = popupContainer.querySelector('.popup__text_type_name');
 let editOccupation = popupContainer.querySelector('.popup__text_type_occupation')
 let name = content.querySelector('.profile__title');
 let occupation = content.querySelector('.profile__subtitle');
+let elementsContainer = content.querySelector('.elements')
+
+const initialCards = [
+    {
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
+
+initialCards.forEach((item) => {
+   const elementTemplate = document.querySelector('#element-template').content;
+   const elementCard = elementTemplate.querySelector('.element').cloneNode(true);
+
+   elementCard.querySelector('.element__photo').src = item.link;
+   elementCard.querySelector('.element__title').textContent = item.name;
+
+   elementsContainer.append(elementCard);
+   console.log(elementsContainer);
+});
 
 function editOpen() {
     editName.value = name.textContent;
