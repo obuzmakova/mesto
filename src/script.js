@@ -1,4 +1,5 @@
 let content = document.querySelector('.content');
+
 let editButton = content.querySelector('.profile__edit-button');
 let popupForm = document.querySelector('.popup');
 let popupContainer = popupForm.querySelector('.popup__container');
@@ -7,7 +8,13 @@ let editName = popupContainer.querySelector('.popup__text_type_name');
 let editOccupation = popupContainer.querySelector('.popup__text_type_occupation')
 let name = content.querySelector('.profile__title');
 let occupation = content.querySelector('.profile__subtitle');
-let elementsContainer = content.querySelector('.elements')
+
+let addCardButton = content.querySelector('.profile__add-button');
+let popupCardForm = document.querySelector('.popup-card');
+let popupCardContainer = popupCardForm.querySelector('.popup-card__container');
+let closeCardButton = popupCardContainer.querySelector('.popup-card__close-button');
+
+let elementsContainer = content.querySelector('.elements');
 
 const initialCards = [
     {
@@ -66,8 +73,25 @@ function handleFormSubmit (evt) {
     closeForm();
 }
 
+function addCardOpen() {
+    popupCardForm.classList.add('popup-card_opened');
+}
+
+function closeCardForm() {
+    popupCardForm.classList.remove('popup-card_opened');
+}
+
+/*function handleCardFormSubmit(evt) {
+    evt.preventDefault();
+
+}*/
+
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 popupContainer.addEventListener('submit', handleFormSubmit);
 editButton.addEventListener('click', editOpen);
 closeButton.addEventListener('click', closeForm);
+
+//popupCardContainer.addEventListener('submit', handleCardFormSubmit);
+addCardButton.addEventListener('click', addCardOpen);
+closeCardButton.addEventListener('click', closeCardForm);
