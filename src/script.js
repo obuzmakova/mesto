@@ -51,7 +51,9 @@ function addItem(link, name) {
 
     elementCard.querySelector('.element__photo').src = link;
     elementCard.querySelector('.element__title').textContent = name;
-
+    elementCard.querySelector('.element__like').addEventListener('click', function (evt) {
+        evt.target.classList.toggle('element__like_active');
+    });
     return elementCard;
 }
 
@@ -70,8 +72,8 @@ function closeForm() {
 }
 
 function handleFormSubmit (evt) {
+    // Эта строчка отменяет стандартную отправку формы
     evt.preventDefault();
-    // Эта строчка отменяет стандартную отправку формы..
 
     name.textContent = editName.value;
     occupation.textContent = editOccupation.value;
@@ -94,8 +96,6 @@ function handleCardFormSubmit(evt) {
     closeCardForm();
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 popupContainer.addEventListener('submit', handleFormSubmit);
 editButton.addEventListener('click', editOpen);
 closeButton.addEventListener('click', closeForm);

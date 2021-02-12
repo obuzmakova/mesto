@@ -17,7 +17,7 @@
     opacity: 0.5;
 }
 
-.element__like:active {
+.element__like_active {
     background-image: url("../../../images/like-active.svg");
     background-color: unset;
     opacity: 1;
