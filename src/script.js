@@ -54,6 +54,9 @@ function addItem(link, name) {
     elementCard.querySelector('.element__like').addEventListener('click', function (evt) {
         evt.target.classList.toggle('element__like_active');
     });
+    elementCard.querySelector('.element__trash').addEventListener('click', function (evt) {
+        elementCard.remove();
+    });
     return elementCard;
 }
 
