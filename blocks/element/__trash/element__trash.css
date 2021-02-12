@@ -1,0 +1,13 @@
+.element__trash {
+    grid-row: 1/2;
+    grid-column: 2/3;
+    border: none;
+    padding: 0;
+    margin: 18px 15px auto auto;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.element__trash:hover {
+    filter: invert(0.4);
+}
