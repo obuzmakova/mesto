@@ -1,27 +1,27 @@
-let content = document.querySelector('.content');
-let elementsContainer = content.querySelector('.elements');
+const content = document.querySelector('.content');
+const elementsContainer = content.querySelector('.elements');
 
-let openPopupProfile = content.querySelector('.profile__edit-button');
-let popupProfileForm = document.querySelector('.popup-profile');
-let popupProfileContainer = popupProfileForm.querySelector('.popup-profile__container');
-let closePopupProfile = popupProfileContainer.querySelector('.popup-profile__close-button');
-let editProfileName = popupProfileContainer.querySelector('.popup-profile__text_type_name');
-let editProfileOccupation = popupProfileContainer.querySelector('.popup-profile__text_type_occupation')
-let profileName = content.querySelector('.profile__title');
-let profileOccupation = content.querySelector('.profile__subtitle');
+const openPopupProfile = content.querySelector('.profile__edit-button');
+const popupProfileForm = document.querySelector('.popup-profile');
+const popupProfileContainer = popupProfileForm.querySelector('.popup-profile__container');
+const closePopupProfile = popupProfileContainer.querySelector('.popup-profile__close-button');
+const editProfileName = popupProfileContainer.querySelector('.popup-profile__text_type_name');
+const editProfileOccupation = popupProfileContainer.querySelector('.popup-profile__text_type_occupation')
+const profileName = content.querySelector('.profile__title');
+const profileOccupation = content.querySelector('.profile__subtitle');
 
-let openPopupCard = content.querySelector('.profile__add-button');
-let popupCardForm = document.querySelector('.popup-card');
-let popupCardContainer = popupCardForm.querySelector('.popup-card__container');
-let closePopupCard = popupCardContainer.querySelector('.popup-card__close-button');
-let addCardName = popupCardContainer.querySelector('.popup-card__text_type_name');
-let addCardLink = popupCardContainer.querySelector('.popup-card__text_type_link');
+const openPopupCard = content.querySelector('.profile__add-button');
+const popupCardForm = document.querySelector('.popup-card');
+const popupCardContainer = popupCardForm.querySelector('.popup-card__container');
+const closePopupCard = popupCardContainer.querySelector('.popup-card__close-button');
+const addCardName = popupCardContainer.querySelector('.popup-card__text_type_name');
+const addCardLink = popupCardContainer.querySelector('.popup-card__text_type_link');
 
-let openPopupImage = document.querySelector('.popup-img');
-let popupImageContainer = openPopupImage.querySelector('.popup-img__container');
-let closePopupImage = popupImageContainer.querySelector('.popup-img__close-button');
-let imageFull = popupImageContainer.querySelector('.popup-img__photo');
-let imageTitle = popupImageContainer.querySelector('.popup-img__title');
+const openPopupImage = document.querySelector('.popup-img');
+const popupImageContainer = openPopupImage.querySelector('.popup-img__container');
+const closePopupImage = popupImageContainer.querySelector('.popup-img__close-button');
+const imageFull = popupImageContainer.querySelector('.popup-img__photo');
+const imageTitle = popupImageContainer.querySelector('.popup-img__title');
 
 const initialCards = [
     {
@@ -66,6 +66,7 @@ function addItem(link, name) {
     });
     elemImage.addEventListener('click', function (evt) {
         imageFull.src = link;
+        imageFull.alt = name;
         imageTitle.textContent = name;
         openPopupImage.classList.add('popup-img_opened');
     });
