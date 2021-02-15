@@ -1,4 +1,4 @@
-.popup__rows {
+.popup-profile__rows {
     margin: 0 auto;
     padding: 0;
     display: flex;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 560px) {
-    .popup__rows {
+    .popup-profile__rows {
         width: 238px;
     }
 }

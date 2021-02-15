@@ -32,15 +32,15 @@
             <p class="footer__copyright">© 2021 Mesto Russia</p>
         </footer>
 
-        <div class="popup">
-            <form name="profile" class="popup__container">
-                <button type="button" class="popup__close-button"></button>
-                <h3 class="popup__title">Редактировать профиль</h3>
-                <div class="popup__rows">
-                    <input type="text" name="name" class="popup__text popup__text_type_name">
-                    <input type="text" name="occupation" class="popup__text popup__text_type_occupation">
+        <div class="popup-profile">
+            <form name="profile" class="popup-profile__container">
+                <button type="button" class="popup-profile__close-button"></button>
+                <h3 class="popup-profile__title">Редактировать профиль</h3>
+                <div class="popup-profile__rows">
+                    <input type="text" name="name" class="popup-profile__text popup-profile__text_type_name">
+                    <input type="text" name="occupation" class="popup-profile__text popup-profile__text_type_occupation">
                 </div>
-                <button type="submit" class="popup__submit-btn">Сохранить</button>
+                <button type="submit" class="popup-profile__submit-btn">Сохранить</button>
             </form>
         </div>
 
@@ -55,6 +55,14 @@
                     popup-card__text_type_link">
                 </div>
                 <button type="submit" class="popup-card__submit-btn">Сохранить</button>
+            </form>
+        </div>
+
+        <div class="popup-img">
+            <form name="img" class="popup-img__container">
+                <button type="button" class="popup-img__close-button"></button>
+                <img class="popup-img__photo">
+                <h3 class="popup-img__title"></h3>
             </form>
         </div>
 
