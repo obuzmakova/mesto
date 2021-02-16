@@ -1,4 +1,4 @@
-.popup-card__text {
+.popup__text {
     padding: 30px 0 13px 0;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     border-left: 0;
@@ -12,6 +12,6 @@
     box-sizing: border-box;
 }
 
-.popup-card__text::placeholder {
+.popup__text::placeholder {
     color: #C4C4C4;
 }

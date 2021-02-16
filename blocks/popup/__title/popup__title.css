@@ -1,4 +1,4 @@
-.popup-profile__title {
+.popup__title {
     font-size: 24px;
     font-style: normal;
     font-weight: 900;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 560px) {
-    .popup-profile__title {
+    .popup__title {
         font-size: 18px;
         line-height: 22px;
         margin: 25px auto 45px auto;

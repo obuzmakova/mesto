@@ -1,4 +1,4 @@
-.popup-card__submit-btn {
+.popup__submit-btn {
     width: 358px;
     margin: 48px auto 37px auto;
     height: 50px;
@@ -15,12 +15,12 @@
     cursor: pointer;
 }
 
-.popup-card__submit-btn:hover {
+.popup__submit-btn:hover {
     opacity: 0.8;
 }
 
 @media screen and (max-width: 560px) {
-    .popup-card__submit-btn {
+    .popup__submit-btn {
         margin-top: 45px;
         margin-bottom: 25px;
         width: 238px;
