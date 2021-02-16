@@ -22,7 +22,9 @@
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-@import url(../blocks/popup/_type/_img/popup_type_profile_img.css);
+@import url(../blocks/popup/_type/_img/popup_type_img.css);
+@import url(../blocks/popup/_type/_profile/popup_type_profile.css);
+@import url(../blocks/popup/_type/_card/popup_type_card.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_type/_card/popup__container_type_card.css);
 @import url(../blocks/popup/__container/_type/_profile/popup__container_type_profile.css);
