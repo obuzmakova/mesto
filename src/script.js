@@ -79,7 +79,7 @@ initialCards.forEach((item) => {
 
 const closeOnOverlay = (evt) => {
     if (evt.target === evt.currentTarget) {
-        closePopup(evt.target);
+        closePopup(evt.currentTarget);
     }
 }
 
@@ -112,6 +112,13 @@ function handleCardFormSubmit(evt) {
 }
 
 function editOpen() {
+    const formElements = Array.from(popupProfile.querySelectorAll(".popup__text"));
+    formElements.forEach((formElement) => {
+        const errorElement = popupProfile.querySelector(`.${formElement.id}-error`);
+        formElement.classList.remove('popup__text_type_error');
+        errorElement.classList.remove('popup__text-error_active');
+        errorElement.textContent = '';
+    });
     editProfileName.value = profileName.textContent;
     editProfileOccupation.value = profileOccupation.textContent;
     openPopup(popupProfile);
