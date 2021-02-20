@@ -1,6 +1,7 @@
 const content = document.querySelector('.content');
 const elementsContainer = content.querySelector('.elements');
 const elementTemplate = document.querySelector('#element-template').content;
+const popups = document.querySelectorAll('.popup');
 
 const openPopupProfile = content.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -76,8 +77,26 @@ initialCards.forEach((item) => {
     elementsContainer.append(createItem(item.name, item.link));
 });
 
+const closeOnOverlay = (evt) => {
+    if (evt.target === evt.currentTarget) {
+        closePopup(evt.target);
+    }
+}
+
+const keyHandler = (evt) => {
+    const currPopup = document.querySelector('.popup_opened');
+    if (evt.key === 'Escape') {
+        closePopup(currPopup);
+        document.removeEventListener('keydown', keyHandler);
+    }
+}
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', keyHandler);
+    popups.forEach((item) => {
+        item.addEventListener('click', closeOnOverlay);
+    });
 }
 
 function closePopup(popup) {
@@ -99,7 +118,6 @@ function editOpen() {
 }
 
 function handleFormSubmit (evt) {
-    // Эта строчка отменяет стандартную отправку формы
     evt.preventDefault();
 
     profileName.textContent = editProfileName.value;
