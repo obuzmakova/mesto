@@ -57,6 +57,7 @@ function createItem(name, link) {
     const elemImage = elementCard.querySelector('.element__photo');
 
     elemName.textContent = name;
+    elemImage.alt = name;
     elemImage.src = link;
     elementCard.querySelector('.element__like').addEventListener('click', function (evt) {
         evt.target.classList.toggle('element__like_active');
@@ -87,19 +88,16 @@ const keyHandler = (evt) => {
     const currPopup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
         closePopup(currPopup);
-        document.removeEventListener('keydown', keyHandler);
     }
 }
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', keyHandler);
-    popups.forEach((item) => {
-        item.addEventListener('click', closeOnOverlay);
-    });
 }
 
 function closePopup(popup) {
+    document.removeEventListener('keydown', keyHandler);
     popup.classList.remove('popup_opened');
 }
 
@@ -131,6 +129,10 @@ function handleFormSubmit (evt) {
     profileOccupation.textContent = editProfileOccupation.value;
     closePopup(popupProfile);
 }
+
+popups.forEach((item) => {
+    item.addEventListener('click', closeOnOverlay);
+});
 
 popupCardContainer.addEventListener('submit', handleCardFormSubmit);
 openPopupCard.addEventListener('click', evt => {
