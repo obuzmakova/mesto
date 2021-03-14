@@ -117,22 +117,27 @@ const keyHandler = (evt) => {
     const currPopup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
         closePopup(currPopup);
+        document.removeEventListener('keydown', keyHandler);
     }
 }
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', keyHandler);
+    popups.forEach((item) => {
+        item.addEventListener('click', closeOnOverlay);
+    });
 }
 
 function closePopup(popup) {
-    document.removeEventListener('keydown', keyHandler);
     popup.classList.remove('popup_opened');
 }
 
 function handleCardFormSubmit(evt) {
     evt.preventDefault();
-    elementsContainer.prepend(createItem(addCardName.value, addCardLink.value));
+    const newCard = new Card(addCardName.value, addCardLink.value, '#element-template');
+    const newCardElement = newCard.generateCard();
+    elementsContainer.prepend(newCardElement);
     closePopup(popupCard);
     addCardLink.value = '';
     addCardName.value = '';
