@@ -1,6 +1,5 @@
 const content = document.querySelector('.content');
 const elementsContainer = content.querySelector('.elements');
-const elementTemplate = document.querySelector('#element-template').content;
 const popups = document.querySelectorAll('.popup');
 
 const openPopupProfile = content.querySelector('.profile__edit-button');
@@ -51,31 +50,61 @@ const initialCards = [
     }
 ];
 
-function createItem(name, link) {
-    const elementCard = elementTemplate.querySelector('.element').cloneNode(true);
-    const elemName = elementCard.querySelector('.element__title');
-    const elemImage = elementCard.querySelector('.element__photo');
+class Card {
+    constructor (name, link, cardSelector) {
+        this._name = name;
+        this._link = link;
+        this._cardSelector = cardSelector;
+    }
 
-    elemName.textContent = name;
-    elemImage.alt = name;
-    elemImage.src = link;
-    elementCard.querySelector('.element__like').addEventListener('click', function (evt) {
-        evt.target.classList.toggle('element__like_active');
-    });
-    elementCard.querySelector('.element__trash').addEventListener('click', function (evt) {
-        elementCard.remove();
-    });
-    elemImage.addEventListener('click', function (evt) {
-        imageFull.src = link;
-        imageFull.alt = name;
-        imageTitle.textContent = name;
-        openPopup(popupImage);
-    });
-    return elementCard;
+    _getTemplate() {
+        const cardElement = document
+            .querySelector(this._cardSelector)
+            .content
+            .querySelector('.element')
+            .cloneNode(true);
+
+        return cardElement;
+    }
+
+    _handleOpenPopup() {
+        imageFull.src = this._link;
+        imageFull.alt = this._name;
+        imageTitle.textContent = this._name;
+        popupImage.classList.add('popup_opened');
+        document.addEventListener('keydown', keyHandler);
+        popups.forEach((item) => {
+            item.addEventListener('click', closeOnOverlay);
+        });
+    }
+
+    _setEventListeners() {
+        this._element.querySelector('.element__like').addEventListener('click', function (evt) {
+            evt.target.classList.toggle('element__like_active');
+        });
+        this._element.querySelector('.element__trash').addEventListener('click', () => {
+            this._element.remove();
+        });
+        this._element.querySelector('.element__photo').addEventListener('click', () => {
+            this._handleOpenPopup();
+        });
+    }
+
+    generateCard() {
+        this._element = this._getTemplate();
+        this._setEventListeners();
+
+        this._element.querySelector('.element__title').textContent = this._name;
+        this._element.querySelector('.element__photo').src = this._link;
+
+        return this._element;
+    }
 }
 
 initialCards.forEach((item) => {
-    elementsContainer.append(createItem(item.name, item.link));
+    const card = new Card(item.name, item.link, '#element-template');
+    const cardElement = card.generateCard();
+    elementsContainer.append(cardElement);
 });
 
 const closeOnOverlay = (evt) => {
