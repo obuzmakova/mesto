@@ -37,10 +37,10 @@
                 <button type="button" class="popup__close-button"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <div class="popup__rows">
-                    <input type="text" name="name" class="popup__text popup__text_type_name" id="name-input"
-                           minlength="2" maxlength="40" required>
+                    <input type="text" placeholder="Имя" class="popup__text popup__text_type_name"
+                           id="name-input" minlength="2" maxlength="40" required>
                     <span class="popup__text-error name-input-error"></span>
-                    <input type="text" name="occupation" class="popup__text popup__text_type_occupation"
+                    <input type="text" placeholder="Вид деятельности" class="popup__text popup__text_type_occupation"
                            id="occupation-input" minlength="2" maxlength="200" required>
                     <span class="popup__text-error occupation-input-error"></span>
                 </div>
@@ -83,8 +83,9 @@
         </div>
     </template>
 
-    <script type="module" src="src/Card.js"></script>
+    <script src="src/initial-сards.js"></script>
     <script type="module" src="src/script.js"></script>
+    <script type="module" src="src/Card.js"></script>
     <script type="module" src="src/FormValidator.js"></script>
 </body>
 </html>
