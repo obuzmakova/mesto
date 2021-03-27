@@ -58,18 +58,7 @@ class FormValidator {
     }
 }
 
-const enableValidation = (settings) => {
-    const formList = Array.from(document.querySelectorAll(settings.formSelector));
-    formList.forEach((formElement) => {
-        formElement.addEventListener('submit', function (evt) {
-            evt.preventDefault();
-        });
-        const form = new FormValidator(settings, formElement);
-        form.enableValidation();
-    });
-};
-
-enableValidation({
+const validationConfig = ({
     formSelector: '.form',
     inputSelector: '.popup__text',
     submitButtonSelector: '.popup__submit-btn',
@@ -78,4 +67,4 @@ enableValidation({
     errorClass: 'popup__text-error_active'
 });
 
-export {enableValidation};
+export {FormValidator, validationConfig};

@@ -1,4 +1,4 @@
-import {openPopup} from './script.js';
+import {openPopup} from '../utils/utils.js';
 
 const popupImage = document.querySelector('.popup_type_img');
 const imageFull = document.querySelector('.popup__image');
