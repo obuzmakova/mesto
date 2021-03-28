@@ -19,6 +19,7 @@ const popupCard = document.querySelector('.popup_type_card');
 const popupCardContainer = popupCard.querySelector('.popup__container_type_card');
 const addCardName = popupCardContainer.querySelector('.popup__text_type_place');
 const addCardLink = popupCardContainer.querySelector('.popup__text_type_link');
+const submitCardButton = popupCard.querySelector('.popup__submit-btn');
 const cardElements = Array.from(popupCard.querySelectorAll(".popup__text"));
 const cardTemplate = document.querySelector('#element-template').content;
 
@@ -27,9 +28,16 @@ function createCard(name, link, cardSelector) {
     return newCard.generateCard();
 }
 
+function cleanCardPopupRows() {
+    addCardLink.value = '';
+    addCardName.value = '';
+    submitCardButton.classList.add('popup__submit-btn_inactive');
+}
+
 function handleCardFormSubmit(evt) {
     evt.preventDefault();
     elementsContainer.prepend(createCard(addCardName.value, addCardLink.value, cardTemplate));
+    cleanCardPopupRows();
     closePopup(popupCard);
 }
 
@@ -56,6 +64,7 @@ editProfileValidator.enableValidation();
 
 popupCardContainer.addEventListener('submit', handleCardFormSubmit);
 openPopupCard.addEventListener('click', evt => {
+    cleanCardPopupRows();
     addCardFormValidator.hideInputErrors(cardElements);
     openPopup(popupCard);
 });
