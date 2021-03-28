@@ -20,19 +20,21 @@ const popupCardContainer = popupCard.querySelector('.popup__container_type_card'
 const addCardName = popupCardContainer.querySelector('.popup__text_type_place');
 const addCardLink = popupCardContainer.querySelector('.popup__text_type_link');
 const cardElements = Array.from(popupCard.querySelectorAll(".popup__text"));
+const cardTemplate = document.querySelector('#element-template').content;
+
+function createCard(name, link, cardSelector) {
+    const newCard = new Card(name, link, cardSelector);
+    return newCard.generateCard();
+}
 
 function handleCardFormSubmit(evt) {
     evt.preventDefault();
-    const newCard = new Card(addCardName.value, addCardLink.value, '#element-template');
-    const newCardElement = newCard.generateCard();
-    elementsContainer.prepend(newCardElement);
+    elementsContainer.prepend(createCard(addCardName.value, addCardLink.value, cardTemplate));
     closePopup(popupCard);
 }
 
 function openEditProfilePopup() {
-    profileElements.forEach((profileElement) => {
-        editProfileValidator.hideInputError(profileElement);
-    });
+    editProfileValidator.hideInputErrors(profileElements);
     editProfileName.value = profileName.textContent;
     editProfileOccupation.value = profileOccupation.textContent;
     openPopup(popupProfile);
@@ -54,9 +56,7 @@ editProfileValidator.enableValidation();
 
 popupCardContainer.addEventListener('submit', handleCardFormSubmit);
 openPopupCard.addEventListener('click', evt => {
-    cardElements.forEach((cardElement) => {
-        addCardFormValidator.hideInputError(cardElement);
-    });
+    addCardFormValidator.hideInputErrors(cardElements);
     openPopup(popupCard);
 });
 
@@ -64,9 +64,7 @@ popupProfileContainer.addEventListener('submit', submitEditProfileForm);
 openPopupProfile.addEventListener('click', openEditProfilePopup);
 
 initialCards.forEach((item) => {
-    const card = new Card(item.name, item.link, '#element-template');
-    const cardElement = card.generateCard();
-    elementsContainer.append(cardElement);
+    elementsContainer.append(createCard(item.name, item.link, cardTemplate));
 });
 
 export {openPopup};

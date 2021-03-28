@@ -17,13 +17,17 @@ const keyHandler = (evt) => {
     }
 }
 
+function addCloseButtonListener(popup) {
+    popup.querySelector('.popup__close-button').addEventListener('click', () => {
+        closePopup(popup);
+    });
+}
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', keyHandler);
     popup.addEventListener('click', closeOnOverlay);
-    popup.querySelector('.popup__close-button').addEventListener('click', () => {
-        closePopup(popup);
-    });
+    addCloseButtonListener(popup);
 }
 
 function closePopup(popup) {
@@ -32,8 +36,8 @@ function closePopup(popup) {
         addCardName.value = '';
         submitCardButton.classList.add('popup__submit-btn_inactive');
     }
-    document.removeEventListener('click', closeOnOverlay);
     document.removeEventListener('keydown', keyHandler);
+    document.removeEventListener('click', closeOnOverlay);
     popup.classList.remove('popup_opened');
 }
 
