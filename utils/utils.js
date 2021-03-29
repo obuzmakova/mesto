@@ -1,6 +1,3 @@
-const popupCard = document.querySelector('.popup_type_card');
-const popupCardContainer = popupCard.querySelector('.popup__container_type_card');
-
 const closeOnOverlay = (evt) => {
     if (evt.target === evt.currentTarget) {
         closePopup(evt.currentTarget);
@@ -14,7 +11,7 @@ const keyHandler = (evt) => {
     }
 }
 
-function addCloseButtonListener(popup) {
+const closePopupByCrossBtn = (popup) => {
     popup.querySelector('.popup__close-button').addEventListener('click', () => {
         closePopup(popup);
     });
@@ -24,13 +21,13 @@ function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', keyHandler);
     popup.addEventListener('click', closeOnOverlay);
-    addCloseButtonListener(popup);
+    popup.addEventListener('click', closePopupByCrossBtn(popup));
 }
 
 function closePopup(popup) {
     document.removeEventListener('keydown', keyHandler);
     popup.removeEventListener('click', closeOnOverlay);
-    popup.removeEventListener('click', closePopup);
+    popup.removeEventListener('click', closePopupByCrossBtn(popup));
     popup.classList.remove('popup_opened');
 }
 
