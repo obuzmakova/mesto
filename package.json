@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Я создала адаптивную [веб-страницу](https://obuzmakova.github.io/mesto/), используя JavaScript (в работе с popup-формами для редактирования профиля, добавления, лайков и удаления карточек, открытия картинок).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/obuzmakova/mesto.git"
+  },
+  "author": "Olga Buzmakova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/obuzmakova/mesto/issues"
+  },
+  "homepage": "https://github.com/obuzmakova/mesto#readme"
+}
