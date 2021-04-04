@@ -1,8 +1,8 @@
 import {Card} from './Card.js';
 import {FormValidator, validationConfig} from './FormValidator.js';
 import {openPopup, closePopup} from '../utils/utils.js';
-import {initialCards, cardListSection} from '../utils/constants';
-import Section from "./Section";
+import {initialCards, cardListSection} from '../utils/constants.js';
+import Section from './Section.js';
 
 const content = document.querySelector('.content');
 const elementsContainer = content.querySelector('.elements');
@@ -33,16 +33,17 @@ const cardList = new Section({
         const cardElement = card.generateCard();
 
         cardList.addItem(cardElement)
+        },
     },
     cardListSection
-});
+);
 
 cardList.renderItems();
 
-// function createCard(name, link, cardSelector) {
-//     const newCard = new Card(name, link, cardSelector);
-//     return newCard.generateCard();
-// }
+function createCard(name, link, cardSelector) {
+    const newCard = new Card(name, link, cardSelector);
+    return newCard.generateCard();
+}
 
 function cleanCardPopupRows() {
     addCardLink.value = '';
