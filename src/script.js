@@ -3,6 +3,7 @@ import {FormValidator, validationConfig} from './FormValidator.js';
 import {openPopup, closePopup} from '../utils/utils.js';
 import {initialCards, cardListSection} from '../utils/constants.js';
 import Section from './Section.js';
+import PopupWithForm from './PopupWithForm.js';
 
 const content = document.querySelector('.content');
 const elementsContainer = content.querySelector('.elements');
@@ -40,6 +41,15 @@ const cardList = new Section({
 
 cardList.renderItems();
 
+const popupTitle = new PopupWithForm(popupProfile, submitEditProfileForm);
+const popupAddCard = new PopupWithForm(popupCard, handleCardFormSubmit);
+
+const addCardFormValidator = new FormValidator(validationConfig, popupCardContainer);
+addCardFormValidator.enableValidation();
+
+const editProfileValidator = new FormValidator(validationConfig, popupProfileContainer);
+editProfileValidator.enableValidation();
+
 function createCard(name, link, cardSelector) {
     const newCard = new Card(name, link, cardSelector);
     return newCard.generateCard();
@@ -73,24 +83,14 @@ function submitEditProfileForm (evt) {
     closePopup(popupProfile);
 }
 
-const addCardFormValidator = new FormValidator(validationConfig, popupCardContainer);
-addCardFormValidator.enableValidation();
-
-const editProfileValidator = new FormValidator(validationConfig, popupProfileContainer);
-editProfileValidator.enableValidation();
-
-popupCardContainer.addEventListener('submit', handleCardFormSubmit);
+//popupCardContainer.addEventListener('submit', handleCardFormSubmit);
 openPopupCard.addEventListener('click', evt => {
     cleanCardPopupRows();
     addCardFormValidator.hideInputErrors(cardElements);
     openPopup(popupCard);
 });
 
-popupProfileContainer.addEventListener('submit', submitEditProfileForm);
+//popupProfileContainer.addEventListener('submit', submitEditProfileForm);
 openPopupProfile.addEventListener('click', openEditProfilePopup);
-
-// initialCards.forEach((item) => {
-//     elementsContainer.append(createCard(item.name, item.link, cardTemplate));
-// });
 
 export {openPopup};
