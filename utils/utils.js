@@ -7,7 +7,7 @@ const closeOnOverlay = (evt) => {
 const keyHandler = (evt) => {
     if (evt.key === 'Escape') {
         const targetPopup = document.querySelector('.popup_opened');
-        closePopup(targetPopup);
+        targetPopup.close();
     }
 }
 
@@ -31,4 +31,4 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
-export {openPopup, closePopup};
+export {closeOnOverlay, openPopup, closePopup};

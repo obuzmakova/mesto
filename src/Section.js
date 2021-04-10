@@ -1,3 +1,4 @@
+//вставляет разметку в DOM (отрисовывает разметку, которую возвращает Card)
 export default class Section {
     constructor({items, renderer}, containerSelector) {
         this._items = items;
