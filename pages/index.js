@@ -8,6 +8,7 @@ import {initialCards, cardListSection, popupTypeImage, imageFull, imageTitle,
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from "../components/UserInfo.js";
 
 //Файл содержит только инициализацию необходимых главной странице модулей — функций и классов, а также содержит описание взаимодействия между классами
 
@@ -47,8 +48,8 @@ const popupAddCard = new PopupWithForm({
 
 function openEditProfilePopup() {
     editProfileValidator.hideInputErrors(profileElements);
-    editProfileName.value = profileName.textContent;
-    editProfileOccupation.value = profileOccupation.textContent;
+    editProfileName.value = user.getUserInfo().returnName;
+    editProfileOccupation.value = user.getUserInfo().returnOccupation;
     popupTitle.open();
 }
 
@@ -57,11 +58,12 @@ openPopupProfile.addEventListener('click', openEditProfilePopup);
 const popupTitle = new PopupWithForm({
     popupSelector: popupProfile,
     handleFormSubmit: (item) => {
-        profileName.textContent = item.title;
-        profileOccupation.textContent = item.occupation;
+        user.setUserInfo(item.title, item.occupation);
         popupTitle.close();
     }
 });
+
+const user = new UserInfo(profileName, profileOccupation);
 
 const addCardFormValidator = new FormValidator(validationConfig, popupCardContainer);
 addCardFormValidator.enableValidation();
