@@ -1,4 +1,4 @@
-//возвращает разметку карточки товара
+//возвращает разметку карточки
 class Card {
     constructor (name, link, cardSelector, handleCardClick) {
         this._name = name;
