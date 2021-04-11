@@ -1,14 +1,10 @@
-import {openPopup} from '../utils/utils.js';
-
-const popupImage = document.querySelector('.popup_type_img');
-const imageFull = document.querySelector('.popup__image');
-const imageTitle = document.querySelector('.popup__name-place');
-
+//возвращает разметку карточки
 class Card {
-    constructor (name, link, cardSelector) {
+    constructor (name, link, cardSelector, handleCardClick) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -19,13 +15,6 @@ class Card {
         return cardElement;
     }
 
-    _handleOpenPopup() {
-        imageFull.src = this._link;
-        imageFull.alt = this._name;
-        imageTitle.textContent = this._name;
-        openPopup(popupImage);
-    }
-
     _setEventListeners() {
         this._element.querySelector('.element__like').addEventListener('click', function (evt) {
             evt.target.classList.toggle('element__like_active');
@@ -34,8 +23,9 @@ class Card {
             this._element.remove();
         });
         this._photo.addEventListener('click', () => {
-            this._handleOpenPopup();
+            this._handleCardClick(this._name, this._link);
         });
+
     }
 
     generateCard() {

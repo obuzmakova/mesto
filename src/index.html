@@ -2,19 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="pages/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto. Russia</title>
 </head>
 <body class="common">
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="images/header-logo.svg" alt="Название ресурса Место. Россия">
+            <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Название ресурса Место. Россия">
         </header>
 
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Жак-Ив Кусто">
+                <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Жак-Ив Кусто">
                 <div class="profile__info">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__edit-button"></button>
@@ -38,11 +37,11 @@
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <div class="popup__rows">
                     <input type="text" placeholder="Имя" class="popup__text popup__text_type_name"
-                           id="name-input" minlength="2" maxlength="40" required>
-                    <span class="popup__text-error name-input-error"></span>
+                           id="title" minlength="2" maxlength="40" required>
+                    <span class="popup__text-error title-error"></span>
                     <input type="text" placeholder="Вид деятельности" class="popup__text popup__text_type_occupation"
-                           id="occupation-input" minlength="2" maxlength="200" required>
-                    <span class="popup__text-error occupation-input-error"></span>
+                           id="occupation" minlength="2" maxlength="200" required>
+                    <span class="popup__text-error occupation-error"></span>
                 </div>
                 <button type="submit" class="popup__submit-btn">Сохранить</button>
             </form>
@@ -54,11 +53,11 @@
                 <h3 class="popup__title">Новое место</h3>
                 <div class="popup__rows">
                     <input type="text" placeholder="Название" class="popup__text popup__text_type_place"
-                           id="place-input" minlength="2" maxlength="30" required>
-                    <span class="popup__text-error place-input-error"></span>
+                           id="name" minlength="2" maxlength="30" required>
+                    <span class="popup__text-error name-error"></span>
                     <input type="url" placeholder="Ссылка на картинку" class="popup__text popup__text_type_link"
-                           id="link-input" required>
-                    <span class="popup__text-error link-input-error"></span>
+                           id="link" required>
+                    <span class="popup__text-error link-error"></span>
                 </div>
                 <button type="submit" class="popup__submit-btn">Сохранить</button>
             </form>
@@ -83,9 +82,5 @@
         </div>
     </template>
 
-    <script src="src/initial-сards.js"></script>
-    <script type="module" src="src/script.js"></script>
-    <script type="module" src="src/Card.js"></script>
-    <script type="module" src="src/FormValidator.js"></script>
 </body>
 </html>
