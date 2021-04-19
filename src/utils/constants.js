@@ -43,6 +43,7 @@ export const editProfileName = popupProfileContainer.querySelector('.popup__text
 export const editProfileOccupation = popupProfileContainer.querySelector('.popup__text_type_occupation')
 export const profileName = content.querySelector('.profile__title');
 export const profileOccupation = content.querySelector('.profile__subtitle');
+export const profileAvatar = content.querySelector('.profile__avatar');
 export const profileElements = Array.from(popupProfile.querySelectorAll(".popup__text"));
 
 export const openPopupCard = content.querySelector('.profile__add-button');
