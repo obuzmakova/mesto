@@ -71,6 +71,14 @@
             </div>
         </div>
 
+        <div class="popup popup_type_question">
+            <div class="popup__container popup__container_type_question">
+                <button type="button" class="popup__close-button"></button>
+                <h3 class="popup__title popup__title_type_question">Вы уверены?</h3>
+                <button type="submit" class="popup__submit-btn popup__submit-btn_type_question">Да</button>
+            </div>
+        </div>
+
     </div>
 
     <template id="element-template">
@@ -79,6 +87,16 @@
             <h3 class="element__title"></h3>
             <button type="button" class="element__trash"></button>
             <button type="button" class="element__like"></button>
+            <p class="element__counter">0</p>
+        </div>
+    </template>
+
+    <template id="element-template_type_diff">
+        <div class="element">
+            <img class="element__photo" src="#" alt="#">
+            <h3 class="element__title"></h3>
+            <button type="button" class="element__like"></button>
+            <p class="element__counter">0</p>
         </div>
     </template>
 

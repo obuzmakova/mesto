@@ -1,14 +1,16 @@
 import {Card} from './components/Card.js';
 import {FormValidator, validationConfig} from './components/FormValidator.js';
-import {initialCards, cardListSection, popupTypeImage, imageFull, imageTitle,
-    cardTemplate, cardElements, openPopupCard, popupCard, elementsContainer,
-    profileElements, editProfileName, profileName, editProfileOccupation,
+import {cardListSection, popupTypeImage, popupTypeTrash, imageFull, imageTitle,
+    cardTemplate, cardTemplateWithoutTrash, cardElements, openPopupCard, popupCard, elementsContainer,
+    profileElements, editProfileName, profileName, profileAvatar, editProfileOccupation,
     profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
     popupProfileContainer} from './utils/constants.js';
 import Section from './components/Section.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import PopupWithImage from './components/PopupWithImage.js';
-import UserInfo from "./components/UserInfo.js";
+import PopupWithQuestion from './components/PopupWithQuestion.js';
+import UserInfo from './components/UserInfo.js';
+import Api from './components/Api';
 import './pages/styles/index.css'; // импорт главного файла стилей
 
 //Файл содержит только инициализацию необходимых главной странице модулей — функций и классов, а также содержит описание взаимодействия между классами
@@ -18,18 +20,58 @@ function handleCardClick(name, link) {
     popupImage.open(name, link, imageFull, imageTitle);
 }
 
-const cardList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        const card = new Card(item.name, item.link, cardTemplate, handleCardClick);
-        const cardElement = card.generateCard();
-        cardList.addItem(cardElement);
-        },
-    },
-    cardListSection
-);
+function handleTrashClick(element) {
+    const popupTrash = new PopupWithQuestion({
+        popupSelector: popupTypeTrash,
+        handleFormSubmit: (element) => {
 
-cardList.renderItems();
+        }
+    })
+    popupTrash.open();
+}
+
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
+    headers: {
+        authorization: '40274b77-9ffb-4125-a1bf-81ac7871106e',
+        'Content-Type': 'application/json'
+    }
+});
+
+let myId = null;
+api.getUserInfo()
+    .then((data) => {
+        myId = data._id;
+        user.setUserInfo(data.name, data.about, data.avatar, data._id);
+    })
+    .catch((err) => {
+    console.log(err);
+});
+
+api.getInitialCards()
+    .then((initialCards) => {
+        const cardList = new Section({
+                items: initialCards,
+                renderer: (item) => {
+                    if (item.owner._id === myId) {
+                        const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, item.likes.length, myId);
+                        const cardElement = card.generateCard();
+                        cardList.addItem(cardElement);
+                    } else {
+                        const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, item.likes.length);
+                        const cardElement = card.generateCard();
+                        cardList.addItem(cardElement);
+                    }
+                },
+            },
+            cardListSection
+        );
+        cardList.renderItems();
+    })
+    .catch((err) => {
+    console.log(err);
+});
+
 
 function openAddCardPopup() {
     addCardFormValidator.hideInputErrors(cardElements);
@@ -43,8 +85,15 @@ const popupImage = new PopupWithImage(popupTypeImage);
 const popupAddCard = new PopupWithForm({
     popupSelector: popupCard,
     handleFormSubmit: (item) => {
-        const oneCard = new Card(item.name, item.link, cardTemplate, handleCardClick);
+        const oneCard = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick);
         elementsContainer.prepend(oneCard.generateCard());
+        api.addNewCard(item.name, item.link)
+            .then((data) => {
+               //TODO
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         popupAddCard.close();
     }
 });
@@ -62,11 +111,18 @@ const popupTitle = new PopupWithForm({
     popupSelector: popupProfile,
     handleFormSubmit: (item) => {
         user.setUserInfo(item.title, item.occupation);
+        api.updateUserInfo(item.title, item.occupation)
+            .then((data) => {
+                //TODO
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         popupTitle.close();
     }
 });
 
-const user = new UserInfo(profileName, profileOccupation);
+const user = new UserInfo(profileName, profileOccupation, profileAvatar);
 
 const addCardFormValidator = new FormValidator(validationConfig, popupCardContainer);
 addCardFormValidator.enableValidation();
