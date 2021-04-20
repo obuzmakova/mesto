@@ -1,7 +1,7 @@
 import {Card} from './components/Card.js';
 import {FormValidator, validationConfig} from './components/FormValidator.js';
 import {cardListSection, popupTypeImage, popupTypeTrash, imageFull, imageTitle,
-    cardTemplate, cardElements, openPopupCard, popupCard, elementsContainer,
+    cardTemplate, cardTemplateWithoutTrash, cardElements, openPopupCard, popupCard, elementsContainer,
     profileElements, editProfileName, profileName, profileAvatar, editProfileOccupation,
     profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
     popupProfileContainer} from './utils/constants.js';
@@ -38,9 +38,11 @@ const api = new Api({
     }
 });
 
+let myId = null;
 api.getUserInfo()
     .then((data) => {
-        user.setUserInfo(data.name, data.about, data.avatar, data._id)
+        myId = data._id;
+        user.setUserInfo(data.name, data.about, data.avatar, data._id);
     })
     .catch((err) => {
     console.log(err);
@@ -51,9 +53,15 @@ api.getInitialCards()
         const cardList = new Section({
                 items: initialCards,
                 renderer: (item) => {
-                    const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, item.likes.length, item._id);
-                    const cardElement = card.generateCard();
-                    cardList.addItem(cardElement);
+                    if (item.owner._id === myId) {
+                        const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, item.likes.length, myId);
+                        const cardElement = card.generateCard();
+                        cardList.addItem(cardElement);
+                    } else {
+                        const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, item.likes.length);
+                        const cardElement = card.generateCard();
+                        cardList.addItem(cardElement);
+                    }
                 },
             },
             cardListSection

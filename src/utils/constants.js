@@ -17,6 +17,7 @@ export const popupCard = document.querySelector('.popup_type_card');
 export const popupCardContainer = popupCard.querySelector('.popup__container_type_card');
 export const cardElements = Array.from(popupCard.querySelectorAll(".popup__text"));
 export const cardTemplate = document.querySelector('#element-template').content;
+export const cardTemplateWithoutTrash = document.querySelector('#element-template_type_diff').content;
 export const popupTypeImage = document.querySelector('.popup_type_img');
 export const popupTypeTrash = document.querySelector('.popup_type_question');
 export const imageFull = document.querySelector('.popup__image');
