@@ -8,7 +8,10 @@ export default class PopupWithQuestion extends Popup{
 
     _deleteCardSubmit(evt) {
         evt.preventDefault();
-        this._handleFormSubmit();
+        this._handleFormSubmit()
+            // .then(() => {
+            //     this.close();
+            // });
     }
 
     setEventListeners() {

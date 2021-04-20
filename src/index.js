@@ -33,20 +33,22 @@ const handleLikeClick = (id) => {
     })
 }
 
-function handleTrashClick(id) {
-    const popupTrash = new PopupWithQuestion({
-        popupSelector: popupTypeTrash,
-        handleFormSubmit: () => {
-            api.deleteCard(id)
-                .then((data) => {
-                    //TODO
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        }
+const handleTrashClick = (id) => {
+    return new Promise(resolve => {
+        const popupTrash = new PopupWithQuestion({
+            popupSelector: popupTypeTrash,
+            handleFormSubmit: () => {
+                api.deleteCard(id)
+                    .then((data) => {})
+                    .then(resolve)
+                    .catch((err) => {
+                        console.log(err);
+                    });
+                popupTrash.close();
+            }
+        })
+        popupTrash.open()
     })
-    popupTrash.open();
 }
 
 const api = new Api({

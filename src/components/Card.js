@@ -23,7 +23,6 @@ class Card {
     }
 
     _updateLikes(likes) {
-        console.log(likes);
         this._element.querySelector('.element__counter').textContent = likes;
     }
 
@@ -37,7 +36,10 @@ class Card {
         });
         if (this._owner) {
             this._element.querySelector('.element__trash').addEventListener('click', () => {
-                this._handleTrashClick(this._id);
+                this._handleTrashClick(this._id)
+                    .then(() => {
+                        this._element.remove();
+                    })
             });
         }
         this._photo.addEventListener('click', () => {
