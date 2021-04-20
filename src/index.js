@@ -77,6 +77,10 @@ const popupTitle = new PopupWithForm({
     popupSelector: popupProfile,
     handleFormSubmit: (item) => {
         user.setUserInfo(item.title, item.occupation);
+        api.updateUserInfo(item.title, item.occupation)
+            .then((data) => {
+                console.log(data);
+            })
         popupTitle.close();
     }
 });

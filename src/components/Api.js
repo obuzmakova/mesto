@@ -26,5 +26,14 @@ export default class Api {
             .then(this._checkResponse);
     }
 
-    // другие методы работы с API
+    updateUserInfo(newName, newAbout) {
+        return fetch(`${this._url}/users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: newName,
+                about: newAbout
+            })
+        })
+    }
 }
