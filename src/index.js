@@ -20,6 +20,19 @@ function handleCardClick(name, link) {
     popupImage.open(name, link, imageFull, imageTitle);
 }
 
+const handleLikeClick = (id) => {
+    return new Promise(resolve => {
+        api.setLike(id)
+            .then((data) => {
+                return data.likes.length;
+            })
+            .then(resolve)
+            .catch((err) => {
+                console.log(err);
+            });
+    })
+}
+
 function handleTrashClick(id) {
     const popupTrash = new PopupWithQuestion({
         popupSelector: popupTypeTrash,
@@ -28,6 +41,9 @@ function handleTrashClick(id) {
                 .then((data) => {
                     //TODO
                 })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
     })
     popupTrash.open();
@@ -57,11 +73,11 @@ api.getInitialCards()
                 items: initialCards,
                 renderer: (item) => {
                     if (item.owner._id === myId) {
-                        const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, item.likes.length, item._id, myId);
+                        const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, item.likes.length, item._id, myId);
                         const cardElement = card.generateCard();
                         cardList.addItem(cardElement);
                     } else {
-                        const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, item.likes.length, item._id);
+                        const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, handleLikeClick, item.likes.length, item._id);
                         const cardElement = card.generateCard();
                         cardList.addItem(cardElement);
                     }
@@ -83,14 +99,14 @@ function openAddCardPopup() {
 
 openPopupCard.addEventListener('click', openAddCardPopup);
 
-const popupImage = new PopupWithImage(popupTypeImage);
+//const popupImage = new PopupWithImage(popupTypeImage);
 
 const popupAddCard = new PopupWithForm({
     popupSelector: popupCard,
     handleFormSubmit: (item) => {
         api.addNewCard(item.name, item.link)
             .then((data) => {
-                const oneCard = new Card(data.name, data.link, cardTemplate, handleCardClick, handleTrashClick, data.likes.length, data._id, myId);
+                const oneCard = new Card(data.name, data.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, data.likes.length, data._id, myId);
                 elementsContainer.prepend(oneCard.generateCard());
             })
             .catch((err) => {

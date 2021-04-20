@@ -1,11 +1,14 @@
 //возвращает разметку карточки
+import {handleLikeClick} from "../index";
+
 class Card {
-    constructor (name, link, cardSelector, handleCardClick, handleTrashClick, likes, id, owner) {
+    constructor (name, link, cardSelector, handleCardClick, handleTrashClick, handleLikeClick, likes, id, owner) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleTrashClick = handleTrashClick;
+        this._handleLikeClick = handleLikeClick;
         this._likes = likes;
         this._id = id;
         this._owner = owner;
@@ -19,8 +22,17 @@ class Card {
         return cardElement;
     }
 
+    _updateLikes(likes) {
+        console.log(likes);
+        this._element.querySelector('.element__counter').textContent = likes;
+    }
+
     _setEventListeners() {
-        this._element.querySelector('.element__like').addEventListener('click', function (evt) {
+        this._element.querySelector('.element__like').addEventListener('click', (evt) => {
+            this._handleLikeClick(this._id)
+                .then((data) => {
+                    this._updateLikes(data);
+                });
             evt.target.classList.toggle('element__like_active');
         });
         if (this._owner) {
@@ -31,7 +43,6 @@ class Card {
         this._photo.addEventListener('click', () => {
             this._handleCardClick(this._name, this._link);
         });
-
     }
 
     generateCard() {
