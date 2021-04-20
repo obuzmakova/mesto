@@ -1,8 +1,9 @@
 //возвращает разметку карточки
 class Card {
-    constructor (name, link, cardSelector, handleCardClick) {
+    constructor (name, link, id, cardSelector, handleCardClick) {
         this._name = name;
         this._link = link;
+        this._id = id;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
     }

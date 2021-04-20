@@ -1,6 +1,6 @@
 import {Card} from './components/Card.js';
 import {FormValidator, validationConfig} from './components/FormValidator.js';
-import {initialCards, cardListSection, popupTypeImage, imageFull, imageTitle,
+import {cardListSection, popupTypeImage, imageFull, imageTitle,
     cardTemplate, cardElements, openPopupCard, popupCard, elementsContainer,
     profileElements, editProfileName, profileName, profileAvatar, editProfileOccupation,
     profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
@@ -19,18 +19,34 @@ function handleCardClick(name, link) {
     popupImage.open(name, link, imageFull, imageTitle);
 }
 
-const cardList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        const card = new Card(item.name, item.link, cardTemplate, handleCardClick);
-        const cardElement = card.generateCard();
-        cardList.addItem(cardElement);
-        },
-    },
-    cardListSection
-);
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
+    headers: {
+        authorization: '40274b77-9ffb-4125-a1bf-81ac7871106e',
+        'Content-Type': 'application/json'
+    }
+});
 
-cardList.renderItems();
+api.getUserInfo()
+    .then((data) => {
+        user.setUserInfo(data.name, data.about, data.avatar, data._id)
+    })
+
+api.getInitialCards()
+    .then((initialCards) => {
+        const cardList = new Section({
+                items: initialCards,
+                renderer: (item) => {
+                    const card = new Card(item.name, item.link, item._id, cardTemplate, handleCardClick);
+                    const cardElement = card.generateCard();
+                    cardList.addItem(cardElement);
+                },
+            },
+            cardListSection
+        );
+        cardList.renderItems();
+    })
+
 
 function openAddCardPopup() {
     addCardFormValidator.hideInputErrors(cardElements);
@@ -72,16 +88,3 @@ addCardFormValidator.enableValidation();
 
 const editProfileValidator = new FormValidator(validationConfig, popupProfileContainer);
 editProfileValidator.enableValidation();
-
-const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
-    headers: {
-        authorization: '40274b77-9ffb-4125-a1bf-81ac7871106e',
-        'Content-Type': 'application/json'
-    }
-});
-
-api.getUserInfo()
-    .then((data) => {
-    user.setUserInfo(data.name, data.about, data.avatar, data._id)
-})
