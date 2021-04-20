@@ -42,6 +42,9 @@ api.getUserInfo()
     .then((data) => {
         user.setUserInfo(data.name, data.about, data.avatar, data._id)
     })
+    .catch((err) => {
+    console.log(err);
+});
 
 api.getInitialCards()
     .then((initialCards) => {
@@ -57,6 +60,9 @@ api.getInitialCards()
         );
         cardList.renderItems();
     })
+    .catch((err) => {
+    console.log(err);
+});
 
 
 function openAddCardPopup() {
@@ -75,6 +81,9 @@ const popupAddCard = new PopupWithForm({
             .then((data) => {
                //TODO
             })
+            .catch((err) => {
+                console.log(err);
+            });
         popupAddCard.close();
     }
 });
@@ -96,6 +105,9 @@ const popupTitle = new PopupWithForm({
             .then((data) => {
                 //TODO
             })
+            .catch((err) => {
+                console.log(err);
+            });
         popupTitle.close();
     }
 });
