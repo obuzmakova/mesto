@@ -24,7 +24,7 @@ function handleTrashClick(element) {
     const popupTrash = new PopupWithQuestion({
         popupSelector: popupTypeTrash,
         handleFormSubmit: (element) => {
-            //element.remove();
+
         }
     })
     popupTrash.open();
