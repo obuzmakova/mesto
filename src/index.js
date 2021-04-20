@@ -16,7 +16,7 @@ import './pages/styles/index.css'; // импорт главного файла �
 //Файл содержит только инициализацию необходимых главной странице модулей — функций и классов, а также содержит описание взаимодействия между классами
 
 function handleCardClick(name, link) {
-    const popupImage = new PopupWithImage(popupTypeImage);
+    // const popupImage = new PopupWithImage(popupTypeImage);
     popupImage.open(name, link, imageFull, imageTitle);
 }
 
@@ -79,6 +79,8 @@ function openAddCardPopup() {
 }
 
 openPopupCard.addEventListener('click', openAddCardPopup);
+
+const popupImage = new PopupWithImage(popupTypeImage);
 
 const popupAddCard = new PopupWithForm({
     popupSelector: popupCard,
