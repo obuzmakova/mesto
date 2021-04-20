@@ -1,10 +1,11 @@
 //возвращает разметку карточки
 class Card {
-    constructor (name, link, cardSelector, handleCardClick, id) {
+    constructor (name, link, cardSelector, handleCardClick, likes, id) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._likes = likes;
         this._id = id;
     }
 
@@ -35,6 +36,7 @@ class Card {
         this._setEventListeners();
 
         this._element.querySelector('.element__title').textContent = this._name;
+        this._element.querySelector('.element__counter').textContent = this._likes;
         this._photo.src = this._link;
         this._photo.alt = this._name;
 

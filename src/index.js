@@ -37,7 +37,7 @@ api.getInitialCards()
         const cardList = new Section({
                 items: initialCards,
                 renderer: (item) => {
-                    const card = new Card(item.name, item.link, cardTemplate, handleCardClick, item._id);
+                    const card = new Card(item.name, item.link, cardTemplate, handleCardClick, item.likes.length, item._id);
                     const cardElement = card.generateCard();
                     cardList.addItem(cardElement);
                 },
