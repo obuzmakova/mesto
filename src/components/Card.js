@@ -28,11 +28,12 @@ class Card {
 
     _setEventListeners() {
         this._element.querySelector('.element__like').addEventListener('click', (evt) => {
-            this._handleLikeClick(this._id)
+            evt.target.classList.toggle('element__like_active');
+            //console.log(evt.target.classList);
+            this._handleLikeClick(this._id, evt.target.classList)
                 .then((data) => {
                     this._updateLikes(data);
                 });
-            evt.target.classList.toggle('element__like_active');
         });
         if (this._owner) {
             this._element.querySelector('.element__trash').addEventListener('click', () => {

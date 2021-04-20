@@ -65,4 +65,12 @@ export default class Api {
         })
             .then(this._checkResponse);
     }
+
+    deleteLike(cardsId) {
+        return fetch(`${this._url}/cards/likes/${cardsId}`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+            .then(this._checkResponse);
+    }
 }

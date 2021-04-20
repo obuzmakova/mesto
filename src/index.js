@@ -20,16 +20,27 @@ function handleCardClick(name, link) {
     popupImage.open(name, link, imageFull, imageTitle);
 }
 
-const handleLikeClick = (id) => {
+const handleLikeClick = (id, classes) => {
     return new Promise(resolve => {
-        api.setLike(id)
-            .then((data) => {
-                return data.likes.length;
-            })
-            .then(resolve)
-            .catch((err) => {
-                console.log(err);
-            });
+        if (classes.value === "element__like"){
+            api.deleteLike(id)
+                .then((data) => {
+                    return data.likes.length;
+                })
+                .then(resolve)
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            api.setLike(id)
+                .then((data) => {
+                    return data.likes.length;
+                })
+                .then(resolve)
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     })
 }
 
