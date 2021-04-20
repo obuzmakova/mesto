@@ -1,11 +1,11 @@
 //возвращает разметку карточки
 class Card {
-    constructor (name, link, id, cardSelector, handleCardClick) {
+    constructor (name, link, cardSelector, handleCardClick, id) {
         this._name = name;
         this._link = link;
-        this._id = id;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._id = id;
     }
 
     _getTemplate() {

@@ -35,5 +35,18 @@ export default class Api {
                 about: newAbout
             })
         })
+            .then(this._checkResponse);
+    }
+
+    addNewCard(newName, newLink) {
+        return fetch(`${this._url}/cards`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: newName,
+                link: newLink
+            })
+        })
+            .then(this._checkResponse);
     }
 }

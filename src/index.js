@@ -37,7 +37,7 @@ api.getInitialCards()
         const cardList = new Section({
                 items: initialCards,
                 renderer: (item) => {
-                    const card = new Card(item.name, item.link, item._id, cardTemplate, handleCardClick);
+                    const card = new Card(item.name, item.link, cardTemplate, handleCardClick, item._id);
                     const cardElement = card.generateCard();
                     cardList.addItem(cardElement);
                 },
@@ -60,6 +60,10 @@ const popupAddCard = new PopupWithForm({
     handleFormSubmit: (item) => {
         const oneCard = new Card(item.name, item.link, cardTemplate, handleCardClick);
         elementsContainer.prepend(oneCard.generateCard());
+        api.addNewCard(item.name, item.link)
+            .then((data) => {
+               //TODO
+            })
         popupAddCard.close();
     }
 });
@@ -79,7 +83,7 @@ const popupTitle = new PopupWithForm({
         user.setUserInfo(item.title, item.occupation);
         api.updateUserInfo(item.title, item.occupation)
             .then((data) => {
-                console.log(data);
+                //TODO
             })
         popupTitle.close();
     }
