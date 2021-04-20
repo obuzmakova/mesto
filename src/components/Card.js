@@ -1,12 +1,13 @@
 //возвращает разметку карточки
 class Card {
-    constructor (name, link, cardSelector, handleCardClick, handleTrashClick, likes, owner) {
+    constructor (name, link, cardSelector, handleCardClick, handleTrashClick, likes, id, owner) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleTrashClick = handleTrashClick;
         this._likes = likes;
+        this._id = id;
         this._owner = owner;
     }
 
@@ -24,8 +25,7 @@ class Card {
         });
         if (this._owner) {
             this._element.querySelector('.element__trash').addEventListener('click', () => {
-                this._handleTrashClick(this._element);
-                //this._element.remove();
+                this._handleTrashClick(this._id);
             });
         }
         this._photo.addEventListener('click', () => {

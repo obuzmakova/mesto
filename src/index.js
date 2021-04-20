@@ -16,15 +16,18 @@ import './pages/styles/index.css'; // импорт главного файла �
 //Файл содержит только инициализацию необходимых главной странице модулей — функций и классов, а также содержит описание взаимодействия между классами
 
 function handleCardClick(name, link) {
-    // const popupImage = new PopupWithImage(popupTypeImage);
+    const popupImage = new PopupWithImage(popupTypeImage);
     popupImage.open(name, link, imageFull, imageTitle);
 }
 
-function handleTrashClick(element) {
+function handleTrashClick(id) {
     const popupTrash = new PopupWithQuestion({
         popupSelector: popupTypeTrash,
-        handleFormSubmit: (element) => {
-
+        handleFormSubmit: () => {
+            api.deleteCard(id)
+                .then((data) => {
+                    //TODO
+                })
         }
     })
     popupTrash.open();
@@ -54,11 +57,11 @@ api.getInitialCards()
                 items: initialCards,
                 renderer: (item) => {
                     if (item.owner._id === myId) {
-                        const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, item.likes.length, myId);
+                        const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, item.likes.length, item._id, myId);
                         const cardElement = card.generateCard();
                         cardList.addItem(cardElement);
                     } else {
-                        const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, item.likes.length);
+                        const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, item.likes.length, item._id);
                         const cardElement = card.generateCard();
                         cardList.addItem(cardElement);
                     }
@@ -85,11 +88,10 @@ const popupImage = new PopupWithImage(popupTypeImage);
 const popupAddCard = new PopupWithForm({
     popupSelector: popupCard,
     handleFormSubmit: (item) => {
-        const oneCard = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick);
-        elementsContainer.prepend(oneCard.generateCard());
         api.addNewCard(item.name, item.link)
             .then((data) => {
-               //TODO
+                const oneCard = new Card(data.name, data.link, cardTemplate, handleCardClick, handleTrashClick, data.likes.length, data._id, myId);
+                elementsContainer.prepend(oneCard.generateCard());
             })
             .catch((err) => {
                 console.log(err);
