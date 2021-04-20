@@ -1,6 +1,6 @@
 import {Card} from './components/Card.js';
 import {FormValidator, validationConfig} from './components/FormValidator.js';
-import {cardListSection, popupTypeImage, imageFull, imageTitle,
+import {cardListSection, popupTypeImage, popupTypeTrash, imageFull, imageTitle,
     cardTemplate, cardElements, openPopupCard, popupCard, elementsContainer,
     profileElements, editProfileName, profileName, profileAvatar, editProfileOccupation,
     profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
@@ -8,7 +8,8 @@ import {cardListSection, popupTypeImage, imageFull, imageTitle,
 import Section from './components/Section.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import PopupWithImage from './components/PopupWithImage.js';
-import UserInfo from "./components/UserInfo.js";
+import PopupWithQuestion from './components/PopupWithQuestion.js';
+import UserInfo from './components/UserInfo.js';
 import Api from './components/Api';
 import './pages/styles/index.css'; // импорт главного файла стилей
 
@@ -17,6 +18,16 @@ import './pages/styles/index.css'; // импорт главного файла �
 function handleCardClick(name, link) {
     const popupImage = new PopupWithImage(popupTypeImage);
     popupImage.open(name, link, imageFull, imageTitle);
+}
+
+function handleTrashClick(element) {
+    const popupTrash = new PopupWithQuestion({
+        popupSelector: popupTypeTrash,
+        handleFormSubmit: (element) => {
+            //element.remove();
+        }
+    })
+    popupTrash.open();
 }
 
 const api = new Api({
@@ -37,7 +48,7 @@ api.getInitialCards()
         const cardList = new Section({
                 items: initialCards,
                 renderer: (item) => {
-                    const card = new Card(item.name, item.link, cardTemplate, handleCardClick, item.likes.length, item._id);
+                    const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, item.likes.length, item._id);
                     const cardElement = card.generateCard();
                     cardList.addItem(cardElement);
                 },
@@ -58,7 +69,7 @@ openPopupCard.addEventListener('click', openAddCardPopup);
 const popupAddCard = new PopupWithForm({
     popupSelector: popupCard,
     handleFormSubmit: (item) => {
-        const oneCard = new Card(item.name, item.link, cardTemplate, handleCardClick);
+        const oneCard = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick);
         elementsContainer.prepend(oneCard.generateCard());
         api.addNewCard(item.name, item.link)
             .then((data) => {

@@ -32,8 +32,6 @@ export default class PopupWithForm extends Popup{
         this._popupSelector.querySelector('.popup__submit-btn').classList.add('popup__submit-btn_inactive');
         this._popupSelector.querySelector('.popup__container')
             .removeEventListener('submit', this._submitInfo);
-        // document.removeEventListener('keydown', this._handleEscClose);
-        // this._popupSelector.removeEventListener('click', this._clickClose);
         this._popupSelector.classList.remove('popup_opened');
     }
 }

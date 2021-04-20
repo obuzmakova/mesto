@@ -1,10 +1,11 @@
 //возвращает разметку карточки
 class Card {
-    constructor (name, link, cardSelector, handleCardClick, likes, id) {
+    constructor (name, link, cardSelector, handleCardClick, handleTrashClick, likes, id) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._handleTrashClick = handleTrashClick;
         this._likes = likes;
         this._id = id;
     }
@@ -22,7 +23,8 @@ class Card {
             evt.target.classList.toggle('element__like_active');
         });
         this._element.querySelector('.element__trash').addEventListener('click', () => {
-            this._element.remove();
+            this._handleTrashClick(this._element);
+            //this._element.remove();
         });
         this._photo.addEventListener('click', () => {
             this._handleCardClick(this._name, this._link);
