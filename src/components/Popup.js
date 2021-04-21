@@ -28,6 +28,10 @@ export default class Popup {
         document.addEventListener('keydown', this._handleEscClose);
     }
 
+    renderLoading(text) {
+        this._popupSelector.querySelector('.popup__submit-btn').textContent = text;
+    }
+
     open() {
         this._popupSelector.classList.add('popup_opened');
         this.setEventListeners();

@@ -29,7 +29,6 @@ class Card {
     _setEventListeners() {
         this._element.querySelector('.element__like').addEventListener('click', (evt) => {
             evt.target.classList.toggle('element__like_active');
-            //console.log(evt.target.classList);
             this._handleLikeClick(this._id, evt.target.classList)
                 .then((data) => {
                     this._updateLikes(data);

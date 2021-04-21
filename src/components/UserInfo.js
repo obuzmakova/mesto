@@ -19,6 +19,11 @@ export default class UserInfo {
         this._id = newId;
     }
 
+    setUserTitle(newName, newOccupation) {
+        this._name.textContent = newName;
+        this._occupation.textContent = newOccupation;
+    }
+
     setUserAvatar(newAvatar) {
         this._avatar.src = newAvatar;
     }

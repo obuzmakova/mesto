@@ -113,14 +113,18 @@ profileAvatar.addEventListener('click', openAvatarPopup);
 const avatarPopup = new PopupWithForm({
     popupSelector: popupAvatar,
     handleFormSubmit: (item) => {
+        avatarPopup.renderLoading("Сохранение...");
         api.addNewAvatar(item)
             .then((data) => {
                 user.setUserAvatar(data.avatar);
             })
             .catch((err) => {
                 console.log(err);
-            });
-        avatarPopup.close();
+            })
+            .finally(() => {
+                avatarPopup.renderLoading("Сохранить");
+                avatarPopup.close();
+            })
     }
 })
 
@@ -134,6 +138,7 @@ openPopupCard.addEventListener('click', openAddCardPopup);
 const popupAddCard = new PopupWithForm({
     popupSelector: popupCard,
     handleFormSubmit: (item) => {
+        popupAddCard.renderLoading("Сохранение...");
         api.addNewCard(item.name, item.link)
             .then((data) => {
                 const oneCard = new Card(data.name, data.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, data.likes.length, data._id, myId);
@@ -141,8 +146,11 @@ const popupAddCard = new PopupWithForm({
             })
             .catch((err) => {
                 console.log(err);
-            });
-        popupAddCard.close();
+            })
+            .finally(() => {
+                popupAddCard.renderLoading("Сохранить");
+                popupAddCard.close()
+            })
     }
 });
 
@@ -158,19 +166,20 @@ openPopupProfile.addEventListener('click', openEditProfilePopup);
 const popupTitle = new PopupWithForm({
     popupSelector: popupProfile,
     handleFormSubmit: (item) => {
-        user.setUserInfo(item.title, item.occupation);
+        user.setUserTitle(item.title, item.occupation);
+        popupTitle.renderLoading("Сохранение...");
         api.updateUserInfo(item.title, item.occupation)
             .catch((err) => {
                 console.log(err);
-            });
-        popupTitle.close();
+            })
+            .finally(() => {
+                popupTitle.renderLoading("Сохранить");
+                popupTitle.close();
+            })
     }
 });
 
 const user = new UserInfo(profileName, profileOccupation, profileAvatar);
-
-// const addAvatarFormValidator = new FormValidator(validationConfig, popupAvatarContainer);
-// addAvatarFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(validationConfig, popupCardContainer);
 addCardFormValidator.enableValidation();
