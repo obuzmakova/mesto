@@ -11,7 +11,9 @@ export const profileName = content.querySelector('.profile__title');
 export const profileOccupation = content.querySelector('.profile__subtitle');
 export const profileAvatar = content.querySelector('.profile__avatar');
 export const profileElements = Array.from(popupProfile.querySelectorAll(".popup__text"));
-
+export const popupAvatar = document.querySelector('.popup_type_avatar');
+export const avatarElement = popupAvatar.querySelector(".popup__text");
+export const popupAvatarContainer = popupAvatar.querySelector('.popup__container_type_avatar');
 export const openPopupCard = content.querySelector('.profile__add-button');
 export const popupCard = document.querySelector('.popup_type_card');
 export const popupCardContainer = popupCard.querySelector('.popup__container_type_card');

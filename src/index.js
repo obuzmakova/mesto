@@ -4,7 +4,7 @@ import {cardListSection, popupTypeImage, popupTypeTrash, imageFull, imageTitle,
     cardTemplate, cardTemplateWithoutTrash, cardElements, openPopupCard, popupCard, elementsContainer,
     profileElements, editProfileName, profileName, profileAvatar, editProfileOccupation,
     profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
-    popupProfileContainer} from './utils/constants.js';
+    popupProfileContainer, avatarElement, popupAvatar, popupAvatarContainer} from './utils/constants.js';
 import Section from './components/Section.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import PopupWithImage from './components/PopupWithImage.js';
@@ -104,6 +104,25 @@ api.getInitialCards()
     console.log(err);
 });
 
+function openAvatarPopup() {
+    avatarPopup.open();
+}
+
+profileAvatar.addEventListener('click', openAvatarPopup);
+
+const avatarPopup = new PopupWithForm({
+    popupSelector: popupAvatar,
+    handleFormSubmit: (item) => {
+        api.addNewAvatar(item)
+            .then((data) => {
+                user.setUserAvatar(data.avatar);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        avatarPopup.close();
+    }
+})
 
 function openAddCardPopup() {
     addCardFormValidator.hideInputErrors(cardElements);
@@ -111,8 +130,6 @@ function openAddCardPopup() {
 }
 
 openPopupCard.addEventListener('click', openAddCardPopup);
-
-//const popupImage = new PopupWithImage(popupTypeImage);
 
 const popupAddCard = new PopupWithForm({
     popupSelector: popupCard,
@@ -143,9 +160,6 @@ const popupTitle = new PopupWithForm({
     handleFormSubmit: (item) => {
         user.setUserInfo(item.title, item.occupation);
         api.updateUserInfo(item.title, item.occupation)
-            .then((data) => {
-                //TODO
-            })
             .catch((err) => {
                 console.log(err);
             });
@@ -154,6 +168,9 @@ const popupTitle = new PopupWithForm({
 });
 
 const user = new UserInfo(profileName, profileOccupation, profileAvatar);
+
+// const addAvatarFormValidator = new FormValidator(validationConfig, popupAvatarContainer);
+// addAvatarFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(validationConfig, popupCardContainer);
 addCardFormValidator.enableValidation();
