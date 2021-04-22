@@ -1,5 +1,5 @@
 //возвращает разметку карточки
-import {handleLikeClick} from "../index";
+import {handleLikeClick} from "../index.js";
 
 class Card {
     constructor (name, link, cardSelector, handleCardClick, handleTrashClick, handleLikeClick, likes, id, owner) {

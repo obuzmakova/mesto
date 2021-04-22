@@ -1,4 +1,4 @@
-import {Card} from './components/Card.js';
+import {Card} from './pages/Card.js';
 import {FormValidator, validationConfig} from './components/FormValidator.js';
 import {cardListSection, popupTypeImage, popupTypeTrash, imageFull, imageTitle,
     cardTemplate, cardTemplateWithoutTrash, cardElements, openPopupCard, popupCard, elementsContainer,
@@ -15,8 +15,9 @@ import './pages/styles/index.css'; // импорт главного файла �
 
 //Файл содержит только инициализацию необходимых главной странице модулей — функций и классов, а также содержит описание взаимодействия между классами
 
+const popupImage = new PopupWithImage(popupTypeImage);
+
 function handleCardClick(name, link) {
-    const popupImage = new PopupWithImage(popupTypeImage);
     popupImage.open(name, link, imageFull, imageTitle);
 }
 
@@ -76,33 +77,31 @@ api.getUserInfo()
         myId = data._id;
         user.setUserInfo(data.name, data.about, data.avatar, data._id);
     })
-    .catch((err) => {
-    console.log(err);
-});
-
-api.getInitialCards()
-    .then((initialCards) => {
-        const cardList = new Section({
-                items: initialCards,
-                renderer: (item) => {
-                    if (item.owner._id === myId) {
-                        const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, item.likes.length, item._id, myId);
-                        const cardElement = card.generateCard();
-                        cardList.addItem(cardElement);
-                    } else {
-                        const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, handleLikeClick, item.likes.length, item._id);
-                        const cardElement = card.generateCard();
-                        cardList.addItem(cardElement);
-                    }
-                },
-            },
-            cardListSection
-        );
-        cardList.renderItems();
+    .then(() => {
+        api.getInitialCards()
+            .then((initialCards) => {
+                const cardList = new Section({
+                        items: initialCards,
+                        renderer: (item) => {
+                            if (item.owner._id === myId) {
+                                const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, item.likes.length, item._id, myId);
+                                const cardElement = card.generateCard();
+                                cardList.addItem(cardElement);
+                            } else {
+                                const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, handleLikeClick, item.likes.length, item._id);
+                                const cardElement = card.generateCard();
+                                cardList.addItem(cardElement);
+                            }
+                        },
+                    },
+                    cardListSection
+                );
+                cardList.renderItems();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     })
-    .catch((err) => {
-    console.log(err);
-});
 
 function openAvatarPopup() {
     avatarPopup.open();
