@@ -84,11 +84,11 @@ api.getUserInfo()
                         items: initialCards,
                         renderer: (item) => {
                             if (item.owner._id === myId) {
-                                const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, item.likes.length, item._id, myId);
+                                const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, item.likes, item._id, myId, item.owner._id);
                                 const cardElement = card.generateCard();
                                 cardList.addItem(cardElement);
                             } else {
-                                const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, handleLikeClick, item.likes.length, item._id);
+                                const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, handleLikeClick, item.likes, item._id, myId);
                                 const cardElement = card.generateCard();
                                 cardList.addItem(cardElement);
                             }

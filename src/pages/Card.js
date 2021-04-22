@@ -1,15 +1,17 @@
 //возвращает разметку карточки
 class Card {
-    constructor (name, link, cardSelector, handleCardClick, handleTrashClick, handleLikeClick, likes, id, owner) {
+    constructor (name, link, cardSelector, handleCardClick, handleTrashClick, handleLikeClick, likes, id, owner, itemOwner) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleTrashClick = handleTrashClick;
         this._handleLikeClick = handleLikeClick;
-        this._likes = likes;
+        this._likes = likes.length;
+        this._likesNames = likes;
         this._id = id;
         this._owner = owner;
+        this._itemOwner = itemOwner;
     }
 
     _getTemplate() {
@@ -32,7 +34,7 @@ class Card {
                     this._updateLikes(data);
                 });
         });
-        if (this._owner) {
+        if (this._itemOwner) {
             this._element.querySelector('.element__trash').addEventListener('click', () => {
                 this._handleTrashClick(this._id)
                     .then(() => {
@@ -52,6 +54,17 @@ class Card {
 
         this._element.querySelector('.element__title').textContent = this._name;
         this._element.querySelector('.element__counter').textContent = this._likes;
+        if (Array.isArray(this._likesNames)) {
+            this._likesNames.forEach((item) => {
+                if (item._id === this._owner) {
+                    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+                }
+            })
+        } else {
+            if (this._likesNames._id === this._owner) {
+                    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+                }
+        }
         this._photo.src = this._link;
         this._photo.alt = this._name;
 
