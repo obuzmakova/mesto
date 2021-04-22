@@ -19,7 +19,6 @@ class FormValidator {
         if(this._hasInvalidInput()) {
             this._buttonElement.classList.add(this._inactiveButtonClass);
         } else {
-            console.log("test");
             this._buttonElement.classList.remove(this._inactiveButtonClass);
         }
     }

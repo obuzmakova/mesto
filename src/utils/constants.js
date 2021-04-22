@@ -23,5 +23,3 @@ export const cardTemplate = document.querySelector('#element-template').content;
 export const cardTemplateWithoutTrash = document.querySelector('#element-template_type_diff').content;
 export const popupTypeImage = document.querySelector('.popup_type_img');
 export const popupTypeTrash = document.querySelector('.popup_type_question');
-export const imageFull = document.querySelector('.popup__image');
-export const imageTitle = document.querySelector('.popup__name-place');
