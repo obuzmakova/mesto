@@ -3,7 +3,7 @@ import {FormValidator, validationConfig} from './components/FormValidator.js';
 import {cardListSection, popupTypeImage, popupTypeTrash, cardTemplate, cardTemplateWithoutTrash, cardElements,
     openPopupCard, popupCard, elementsContainer, profileElements, editProfileName, profileName, profileAvatar,
     editProfileOccupation, profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
-    popupProfileContainer, popupAvatar} from './utils/constants.js';
+    popupProfileContainer, popupAvatar, popupAvatarContainer, avatarElement, openPopupAvatar} from './utils/constants.js';
 import renderLoading from './utils/utils.js';
 import Section from './components/Section.js';
 import PopupWithForm from './components/PopupWithForm.js';
@@ -104,10 +104,11 @@ api.getUserInfo()
     })
 
 function openAvatarPopup() {
+    addAvatarFormValidator.hideInputErrors(avatarElement);
     avatarPopup.open();
 }
 
-profileAvatar.addEventListener('click', openAvatarPopup);
+openPopupAvatar.addEventListener('click', openAvatarPopup);
 
 const avatarPopup = new PopupWithForm({
     popupElement: popupAvatar,
@@ -123,6 +124,7 @@ const avatarPopup = new PopupWithForm({
             .finally(() => {
                 renderLoading(popupAvatar, "Сохранить");
                 avatarPopup.close();
+                addAvatarFormValidator.toggleButtonState();
             })
     }
 })
@@ -148,7 +150,8 @@ const popupAddCard = new PopupWithForm({
             })
             .finally(() => {
                 renderLoading(popupCard,"Сохранить");
-                popupAddCard.close()
+                popupAddCard.close();
+                addCardFormValidator.toggleButtonState();
             })
     }
 });
@@ -174,11 +177,15 @@ const popupTitle = new PopupWithForm({
             .finally(() => {
                 renderLoading(popupProfile,"Сохранить");
                 popupTitle.close();
+                editProfileValidator.toggleButtonState();
             })
     }
 });
 
 const user = new UserInfo(profileName, profileOccupation, profileAvatar);
+
+const addAvatarFormValidator = new FormValidator(validationConfig, popupAvatarContainer);
+addAvatarFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(validationConfig, popupCardContainer);
 addCardFormValidator.enableValidation();

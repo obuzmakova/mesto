@@ -13,7 +13,10 @@
 
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Жак-Ив Кусто">
+                <div class="profile__avatar">
+                    <img class="profile__avatar_start" src="<%=require('./images/profile-avatar.jpg')%>" alt="Жак-Ив Кусто">
+                    <div class="profile__avatar_middle"></div>
+                </div>
                 <div class="profile__info">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__edit-button"></button>
@@ -38,7 +41,7 @@
                 <div class="popup__rows">
                     <input type="url" placeholder="Ссылка на аватар" class="popup__text popup__text_type_link"
                            id="avatar" required>
-                    <span class="popup__text-error link-error"></span>
+                    <span class="popup__text-error avatar-error"></span>
                 </div>
                 <button type="submit" class="popup__submit-btn">Сохранить</button>
             </form>
