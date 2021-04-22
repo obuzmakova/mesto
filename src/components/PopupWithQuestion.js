@@ -4,6 +4,7 @@ export default class PopupWithQuestion extends Popup{
     constructor({popupElement, handleFormSubmit}) {
         super(popupElement);
         this._handleFormSubmit = handleFormSubmit;
+        this._deleteCardSubmit = this._deleteCardSubmit.bind(this);
     }
 
     _deleteCardSubmit(evt) {
@@ -14,7 +15,7 @@ export default class PopupWithQuestion extends Popup{
     _setEventListeners() {
         super._setEventListeners();
         this._popupElement.querySelector('.popup__container')
-            .addEventListener("submit", this._deleteCardSubmit.bind(this));
+            .addEventListener("submit", this._deleteCardSubmit);
     }
 
     close(){

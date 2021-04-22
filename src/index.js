@@ -1,10 +1,9 @@
 import {Card} from './pages/Card.js';
 import {FormValidator, validationConfig} from './components/FormValidator.js';
-import {cardListSection, popupTypeImage, popupTypeTrash, imageFull, imageTitle,
-    cardTemplate, cardTemplateWithoutTrash, cardElements, openPopupCard, popupCard, elementsContainer,
-    profileElements, editProfileName, profileName, profileAvatar, editProfileOccupation,
-    profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
-    popupProfileContainer, avatarElement, popupAvatar, popupAvatarContainer} from './utils/constants.js';
+import {cardListSection, popupTypeImage, popupTypeTrash, cardTemplate, cardTemplateWithoutTrash, cardElements,
+    openPopupCard, popupCard, elementsContainer, profileElements, editProfileName, profileName, profileAvatar,
+    editProfileOccupation, profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
+    popupProfileContainer, popupAvatar} from './utils/constants.js';
 import renderLoading from './utils/utils.js';
 import Section from './components/Section.js';
 import PopupWithForm from './components/PopupWithForm.js';
@@ -19,7 +18,7 @@ import './pages/styles/index.css'; // импорт главного файла �
 const popupImage = new PopupWithImage(popupTypeImage);
 
 function handleCardClick(name, link) {
-    popupImage.open(name, link, imageFull, imageTitle);
+    popupImage.open(name, link);
 }
 
 const handleLikeClick = (id, classes) => {
