@@ -8,6 +8,6 @@
     position: relative;
 }
 
-.profile__avatar:hover .profile__avatar_type_start {
+.profile__avatar:hover .profile__image {
     opacity: 0.2;
 }

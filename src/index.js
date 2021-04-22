@@ -142,7 +142,8 @@ const popupAddCard = new PopupWithForm({
         renderLoading(popupCard, "Сохранение...");
         api.addNewCard(item.name, item.link)
             .then((data) => {
-                const oneCard = new Card(data.name, data.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, data.likes.length, data._id, myId);
+                console.log(data.likes.length);
+                const oneCard = new Card(data.name, data.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, data.likes, data._id, myId, data.owner._id);
                 elementsContainer.prepend(oneCard.generateCard());
             })
             .catch((err) => {
