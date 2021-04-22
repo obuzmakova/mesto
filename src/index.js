@@ -115,7 +115,7 @@ const avatarPopup = new PopupWithForm({
         renderLoading(popupAvatar, "Сохранение...");
         api.addNewAvatar(item)
             .then((data) => {
-                user.setUserAvatar(data.avatar);
+                user.setUserInfo(0, 0, data.avatar);
             })
             .catch((err) => {
                 console.log(err);
@@ -165,7 +165,7 @@ openPopupProfile.addEventListener('click', openEditProfilePopup);
 const popupTitle = new PopupWithForm({
     popupElement: popupProfile,
     handleFormSubmit: (item) => {
-        user.setUserTitle(item.title, item.occupation);
+        user.setUserInfo(item.title, item.occupation);
         renderLoading(popupProfile,"Сохранение...");
         api.updateUserInfo(item.title, item.occupation)
             .catch((err) => {

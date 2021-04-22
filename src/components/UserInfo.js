@@ -13,18 +13,13 @@ export default class UserInfo {
     }
 
     setUserInfo(newName, newOccupation, newAvatar, newId) {
-        this._name.textContent = newName;
-        this._occupation.textContent = newOccupation;
-        this._avatar.src = newAvatar;
-        this._id = newId;
-    }
-
-    setUserTitle(newName, newOccupation) {
-        this._name.textContent = newName;
-        this._occupation.textContent = newOccupation;
-    }
-
-    setUserAvatar(newAvatar) {
-        this._avatar.src = newAvatar;
+        if (newName)
+            this._name.textContent = newName;
+        if (newOccupation)
+            this._occupation.textContent = newOccupation;
+        if (newAvatar)
+            this._avatar.src = newAvatar;
+        if (newId)
+            this._id = newId;
     }
 }
