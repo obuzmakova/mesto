@@ -1,17 +1,17 @@
-import {Card} from './pages/Card.js';
-import {FormValidator, validationConfig} from './components/FormValidator.js';
+import {Card} from '../components/Card.js';
+import {FormValidator, validationConfig} from '../components/FormValidator.js';
 import {cardListSection, popupTypeImage, popupTypeTrash, cardTemplate, cardTemplateWithoutTrash, cardElements,
     openPopupCard, popupCard, elementsContainer, profileElements, editProfileName, profileName, profileAvatar,
     editProfileOccupation, profileOccupation, popupProfile, openPopupProfile, popupCardContainer,
-    popupProfileContainer, popupAvatar, popupAvatarContainer, avatarElement, openPopupAvatar} from './utils/constants.js';
-import renderLoading from './utils/utils.js';
-import Section from './components/Section.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithQuestion from './components/PopupWithQuestion.js';
-import UserInfo from './components/UserInfo.js';
-import Api from './components/Api';
-import './pages/styles/index.css'; // импорт главного файла стилей
+    popupProfileContainer, popupAvatar, popupAvatarContainer, avatarElement, openPopupAvatar} from '../utils/constants.js';
+import renderLoading from '../utils/utils.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithQuestion from '../components/PopupWithQuestion.js';
+import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api';
+import './styles/index.css'; // импорт главного файла стилей
 
 //Файл содержит только инициализацию необходимых главной странице модулей — функций и классов, а также содержит описание взаимодействия между классами
 
@@ -83,15 +83,9 @@ api.getUserInfo()
                 const cardList = new Section({
                         items: initialCards,
                         renderer: (item) => {
-                            if (item.owner._id === myId) {
-                                const card = new Card(item.name, item.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, item.likes, item._id, myId, item.owner._id);
+                                const card = createCard(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, handleLikeClick, item.likes, item._id, myId, item.owner._id);
                                 const cardElement = card.generateCard();
                                 cardList.addItem(cardElement);
-                            } else {
-                                const card = new Card(item.name, item.link, cardTemplateWithoutTrash, handleCardClick, handleTrashClick, handleLikeClick, item.likes, item._id, myId);
-                                const cardElement = card.generateCard();
-                                cardList.addItem(cardElement);
-                            }
                         },
                     },
                     cardListSection
@@ -136,14 +130,17 @@ function openAddCardPopup() {
 
 openPopupCard.addEventListener('click', openAddCardPopup);
 
+function createCard(name, link, template, handleCard, handleTrash, handleLike, likes, id, myId, owner) {
+    return new Card(name, link, template, handleCard, handleTrash, handleLike, likes, id, myId, owner);
+}
+
 const popupAddCard = new PopupWithForm({
     popupElement: popupCard,
     handleFormSubmit: (item) => {
         renderLoading(popupCard, "Сохранение...");
         api.addNewCard(item.name, item.link)
             .then((data) => {
-                console.log(data.likes.length);
-                const oneCard = new Card(data.name, data.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, data.likes, data._id, myId, data.owner._id);
+                const oneCard = createCard(data.name, data.link, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick, data.likes, data._id, myId, data.owner._id);
                 elementsContainer.prepend(oneCard.generateCard());
             })
             .catch((err) => {

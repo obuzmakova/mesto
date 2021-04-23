@@ -21,7 +21,6 @@ export default class PopupWithQuestion extends Popup{
     close(){
         this._popupElement.querySelector('.popup__container')
             .removeEventListener("submit", this._deleteCardSubmit);
-        this._popupElement.classList.remove('popup_opened');
         super.close();
     }
 }

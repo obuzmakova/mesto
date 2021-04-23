@@ -34,7 +34,7 @@ class Card {
                     this._updateLikes(data);
                 });
         });
-        if (this._itemOwner) {
+        if (this._itemOwner === this._owner) {
             this._element.querySelector('.element__trash').addEventListener('click', () => {
                 this._handleTrashClick(this._id)
                     .then(() => {
@@ -48,6 +48,9 @@ class Card {
     }
 
     generateCard() {
+        if (this._itemOwner === this._owner) {
+            this._cardSelector = document.querySelector('#element-template').content;
+        }
         this._element = this._getTemplate();
         this._photo = this._element.querySelector('.element__photo');
         this._setEventListeners();
