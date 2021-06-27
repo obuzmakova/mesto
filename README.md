@@ -1,4 +1,4 @@
-# Проект 4: [Место](https://obuzmakova.github.io/mesto/)
+# Проект: [Место](https://obuzmakova.github.io/mesto/)
 
 Я создала адаптивную [веб-страницу](https://obuzmakova.github.io/mesto/), используя JavaScript (в работе с popup-формами для редактирования профиля, добавления, лайков и удаления карточек, открытия картинок).
 
